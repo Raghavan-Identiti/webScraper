@@ -6,7 +6,15 @@ def scrape_website(url):
     url = str(url)
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            channel="chrome",
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ]
+        )
+
         page = browser.new_page()
         page.goto(url, timeout=60000)
 
