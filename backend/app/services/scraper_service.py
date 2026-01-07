@@ -8,7 +8,6 @@ def scrape_website(url):
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
-            channel="chrome",
             args=[
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
