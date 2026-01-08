@@ -2,12 +2,10 @@
 from playwright.sync_api import sync_playwright
 from app.services.text_extractor import extract_structured_text
 
-
 def scrape_website(url: str):
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
-            executable_path="/root/.cache/ms-playwright/chromium-1200/chrome-linux/chrome",
             args=[
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
@@ -18,6 +16,7 @@ def scrape_website(url: str):
         html = page.content()
         browser.close()
         return html
+
 def save_text_file(content: str, filename="output.txt"):
     path = f"/tmp/{filename}"
     with open(path, "w", encoding="utf-8") as f:
